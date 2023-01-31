@@ -1,5 +1,15 @@
 // type TupleType = 
 
+type FooType = {
+  haha: string
+  heihei: number
+}
+
+function foo(): void {
+  return undefined
+  // return 123 // 报错
+}
+
 function useState2<T>(state: T): [T, (newState: T) => void] {
   let currentState = state
   const changeState = (newState: T) => {
