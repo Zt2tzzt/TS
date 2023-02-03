@@ -10,3 +10,4 @@ function getInfo(args: ILength) {
 const info1 = getInfo("aaaa")
 const info2 = getInfo(["aaa", "bbb", "ccc"])
 const info3 = getInfo({ length: 100 })
+
