@@ -1,3 +1,4 @@
+
 type toArray<T> = T extends any? T[]: never
 
 // number[]|string[]

@@ -1,14 +1,9 @@
-interface ILength {
-  length: number
+class Person {}
+
+function factory<T extends new (...args: any[]) => any>(ctor: T): InstanceType<T> {
+	return new ctor()
 }
 
-function getInfo(args: ILength) {
-  return args
-}
+const p = factory(Person) // Person 类型
 
-// 返回的结果 info1，info2，info3 类型为 any，类型丢失了
-const info1 = getInfo("aaaa")
-const info2 = getInfo(["aaa", "bbb", "ccc"])
-const info3 = getInfo({ length: 100 })
-
-
+export {}

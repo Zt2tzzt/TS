@@ -4,6 +4,8 @@ interface IKun {
   slogan?: string
 }
 
+type IKunRequired = Required<IKun>
+
 // 类型体操
 type HYRequired<T> = {
   [P in keyof T]-?: T[P] 

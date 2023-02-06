@@ -3,6 +3,7 @@ interface IKun {
   age: number
   slogan?: string
 }
+type IKunOptional1 = Partial<IKun>
 
 // 类型体操
 type HYPartial<T> = {
