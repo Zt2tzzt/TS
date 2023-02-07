@@ -12,7 +12,7 @@
 
 作用一（主要的作用）：让 TypeScript Compiler 在编译的时候，知道如何去编译 TypeScript 代码和进行类型检测； 
 - 比如，是否允许不明确的 `this` 选项，是否允许隐式的 `any` 类型； 
-- 比如，将 TypeScript 代码编译成什么版本的 JavaScript 代码；
+- 比如，指定将 TypeScript 代码编译成什么版本的 JavaScript 代码；
 
 作用二：让编辑器（如 VSCode）可以按照正确的方式识别 TypeScript 代码； 
 - 更好的语法提示、静态类型检测等等；
@@ -30,7 +30,9 @@
 
 - `tsconfig.json` 文件会被忽略；
 
-*webpack*中使用 *ts-loader* 打包时，也会自动读取 `tsconfig.json` 文件，根据配置编译 TypeScript代 码。
+*webpack* 中使用 *ts-loader* 打包时，也会自动读取 `tsconfig.json` 文件，根据配置编译 TypeScript代 码。
+
+但是在实际开发中，我们的项目 *webpack* 环境通常会使用 *babel* 对 ts 代码进行编译。
 
 ## 4.配置
 
@@ -153,16 +155,18 @@ function sum<T>(num1: T, num2: T): T
 function sum(num1, num2) {
   return num1 + num2
 }
+
 const res = sum(20, 30) // 20 | 30 类型，类型丢失了。
 ```
 
 使用泛型的条件类型重构，类型正确。
 
 ```typescript
-function sum<T extends number | string>(num1: T, num2: T): T extends number ? number : string
+function sum<T extends number|string>(num1: T, num2: T): T extends number ? number : string
 function sum(num1, num2) {
   return num1 + num2
 }
+
 const res = sum(20, 30) // number 类型，类型正确。
 const res2 = sum("abc", "cba") // string 类型，类型正确。
 const res3 = sum(123, "cba") // 报错
@@ -172,7 +176,7 @@ const res3 = sum(123, "cba") // 报错
 
 **在条件类型中推断（Inferring Within Conditional Types）**指的是：
 
-使用条件类型提供的 `infer` 关键词，从条件类型中推断类型，然后在 true 分支里引用该推断结果；
+使用条件类型提供的 `infer` 关键词，从条件类型中推断类型，然后在 true 分支里引用推断结果；
 
 案例理解：
 
@@ -223,6 +227,7 @@ type CalcFnType = (num1: number, num2: string) => number
 function foo() {
   return "abc"
 }
+
 type MyReturnType<T extends (...args: any[]) => void> = T extends (...args: any[]) => infer R ? R : never
 
 type CalcReturnType = MyReturnType<CalcFnType> // number 类型
@@ -286,7 +291,7 @@ type NumArray = ToArray<number | string> //  (string | number)[] 类型
 
 定义一个类型工具 `ToArray`，传入一个联合类型，条件类型会被应用到每个联合成员，联合成员会被分发：
 
-当传入 `string | number` 时，遍历联合成员；相当于 `ToArray<string> | ToArray<number>`；所以最后的结果是：`string[] | number[]`；
+当传入 `string | number` 时，条件类型语句会遍历联合成员；相当于 `ToArray<string> | ToArray<number>`；所以最后的结果是：`string[] | number[]`；
 
 ```typescript
 type ToArray<T> = T extends any ? T[] : never
@@ -321,6 +326,8 @@ type IKunOptional = Partial<IKun>
 ```
 
 ### 2.自己实现
+
+使用了映射类型。
 
 > 【回顾】：`keyof` 作用于对象类型，会将其中所有属性名的字面量类型，作为联合成员，组成一个联合类型。
 >
@@ -363,6 +370,8 @@ type IKunRequired = Required<IKun>
 
 ### 2.自己实现
 
+使用了映射类型。
+
 ```typescript
 interface IKun {
   name: string
@@ -399,6 +408,8 @@ type IKunReadonly = Readonly<IKun>
 ```
 
 ### 2.自己实现
+
+使用了映射类型。
 
 ```typescript
 interface IKun {
@@ -437,6 +448,8 @@ type IKuns = Record<Address, IKun>
 ```
 
 ### 2.自己实现
+
+使用了映射类型。
 
 > 【回顾】：`in` 关键字作用于联合类型，会遍历联合成员。
 >
@@ -485,6 +498,8 @@ type IKunPick = Pick<IKun, 'name' | 'slogan'>
 
 ### 2.自己实现
 
+使用了映射类型。
+
 ```typescript
 interface IKun {
   name: string
@@ -493,11 +508,11 @@ interface IKun {
 }
 
 // 确实 K 一定是 T 中键名字面量类型
-type HYPick<T, K extends keyof T> = {
+type ZTPick<T, K extends keyof T> = {
   [P in K]: T[P]
 }
 
-type IKuns = HYPick<IKun, "slogan"|"name">
+type IKuns = ZTPick<IKun, "slogan"|"name">
 ```
 
 ## 6.Omit<Type, Keys>
@@ -513,13 +528,15 @@ interface IKun {
   slogan?: string
 }
 
-type IKunOmit = Omit<IKun, 'name' | 'slogan'>
+type IKunOmit = Omit<IKun, 'name'|'slogan'>
 /* type IKunOmit = {
 	age: number;
 } */
 ```
 
 ### 2.自己实现
+
+使用了映射类型，和条件类型。
 
 > 【补充】：从联合类型 `U` 中过滤联合类型 `k` 中的联合成员，写法：`U extends K ? never : U`，
 >
@@ -567,7 +584,7 @@ type IkunExclude = Exclude<IKun, 'sing' | 'rap'> // 'dance' 类型
 
 ### 2.自己实现
 
-使用了条件类型中，联合类型的分发
+使用了条件类型，联合类型的分发
 
 ```typescript
 type IKun = 'sing' | 'dance' | 'rap'
@@ -586,12 +603,12 @@ type IkunExclude = MyExclude<IKun, 'sing'|'rap'>
 ```typescript
 type IKun = 'sing' | 'dance' | 'rap'
 
-type IkunExtract = Extract<IKun, 'sing' | 'rap' | 'football'> // 'sing' | 'rap' 类型
+type IkunExtract = Extract<IKun, 'sing'|'rap'|'football'> // 'sing' | 'rap' 类型
 ```
 
 ### 2.自己实现
 
-使用了条件类型中，联合类型的分发
+使用了条件类型，联合类型的分发
 
 ```typescript
 type IKun = 'sing' | 'dance' | 'rap'
@@ -615,6 +632,8 @@ type IKunNonNullable = NonNullable<IKun> // "sing" | "dance" | "rap" 类型
 
 ### 2.自己实现
 
+使用了条件类型，联合类型的分发
+
 ```typescript
 type IKun = "sing" | "dance" | "rap" | null | undefined
 
@@ -624,6 +643,8 @@ type IKunNonNullable = MyNonNullable<IKun>
 ```
 
 ## 10.ReturnType\<Type\>
+
+使用了条件类型，类型推断
 
 [见上方【案例一：ReturnType 实现】](#1案例一：ReturnType 实现)
 
@@ -653,10 +674,10 @@ function factory(ctor: new (...arg: any[]) => any) {
 	new ctor()
 }
 
-const p = factory(Person) // void 类型，类型丢失了
+const p = factory(Person) // any 类型，类型丢失了
 ```
 
-案例二：在工厂函数上使用泛型，并进行泛型类型约束，返回结果被推导为构造函数（器）的类型，而非构造函数（器）创建的实例类型，类型丢失了。
+案例二：在工厂函数上使用泛型，并进行泛型类型约束，返回结果被推导为构造函数（器）的类型，而非构造函数（器）创建的实例的类型，类型丢失了。
 
 ```typescript
 class Person {}
@@ -682,7 +703,7 @@ const p = factory(Person) // Person 类型
 
 ### 2.自己实现
 
-用到了类型推断。
+用到了条件类型，类型推断。
 
 ```typescript
 class Person {}
