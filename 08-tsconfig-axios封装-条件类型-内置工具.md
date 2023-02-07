@@ -30,7 +30,7 @@
 
 - `tsconfig.json` 文件会被忽略；
 
-*webpack* 中使用 *ts-loader* 打包时，也会自动读取 `tsconfig.json` 文件，根据配置编译 TypeScript代 码。
+*webpack* 中使用 *ts-loader* 打包时，也会自动读取 `tsconfig.json` 文件，根据配置编译 TypeScript代 代码。
 
 但是在实际开发中，我们的项目 *webpack* 环境通常会使用 *babel* 对 ts 代码进行编译。
 
@@ -124,7 +124,7 @@ graph LR
 demo-project\09_TypeScript知识扩展-axios封装\src\service\request\index.ts
 
 # 三、条件类型
-泛型（类型）编程的时候，需要基于输入值的类型来决定输出值的类型。**条件类型（Conditional types）**用来帮助我们描述输入类型和输出类型之间的关系。 
+泛型（类型）编程的时候，需要基于输入值的类型来决定输出值的类型。**条件类型（Conditional types）**用来描述输入类型和输出类型之间的关系。 
 
 条件类型的写法类似于 JavaScript 中的条件表达式：”condition ? trueExpression : falseExpression“：
 
