@@ -427,7 +427,7 @@ type IKunReadonly = MyReadonly<IKun>
 
 ## 4.Record<Keys, Type>
 
-用于构造一个对象类型，它所有的 键名都是 `Keys` 联合类型中的联合成员，它所有的键值都是 `Type` 类型。
+用于构造一个对象类型，它所有的键名都是 `Keys` 联合类型中的联合成员，它所有的键值都是 `Type` 类型。
 
 ### 1.基本使用
 
