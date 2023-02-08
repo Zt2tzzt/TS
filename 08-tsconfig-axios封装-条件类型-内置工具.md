@@ -567,7 +567,7 @@ type MyOmit<T, K extends keyof T> = {
   [P in keyof T as P extends K ? never: P]: T[P]
 }
 
-type IKuns = MyOmit<IKun, "slogan"|"name">
+type IKuns = MyOmit<IKun, "name"|"slogan">
 ```
 
 ## 7.Exclude<UnionType, ExcludedMembers>
