@@ -48,7 +48,7 @@ graph LR
     C --> D(compilerOptions)
 			D --> I[下方介绍了部分常见选项]
     C --> E(files)
-			E --> J[编写一个数组, 用于指定项目中包括那些文件]
+			E --> J[编写一个数组, 用于指定项目中包括哪些文件]
 			E --> K[通常当项目中文件比较少时. 可以使用这个选项]
     C --> F(include)
 			F --> L[编写一个数组, 用于指定项目中包括哪些文件]
@@ -91,7 +91,7 @@ graph LR
 		"allowSyntheticDefaultImports": true,
 		"forceConsistentCasingInFileNames": true,
 		"useDefineForClassFields": true,
-		// 是否生成 sourcema p映射文件（ts -> js)
+		// 是否生成 sourcemap 映射文件（ts -> js)
 		"sourceMap": true,
 		// 文件路径在解析时的基本 url
 		"baseUrl": ".",
@@ -512,7 +512,7 @@ type ZTPick<T, K extends keyof T> = {
   [P in K]: T[P]
 }
 
-type IKuns = ZTPick<IKun, "slogan"|"name">
+type IKuns = ZTPick<IKun, "name"|"slogan">
 ```
 
 ## 6.Omit<Type, Keys>
@@ -536,7 +536,7 @@ type IKunOmit = Omit<IKun, 'name'|'slogan'>
 
 ### 2.自己实现
 
-使用了映射类型，和条件类型。
+使用了映射类型，和条件类型的分发。
 
 > 【补充】：从联合类型 `U` 中过滤联合类型 `k` 中的联合成员，写法：`U extends K ? never : U`，
 >
@@ -584,7 +584,7 @@ type IkunExclude = Exclude<IKun, 'sing' | 'rap'> // 'dance' 类型
 
 ### 2.自己实现
 
-使用了条件类型，联合类型的分发
+使用了条件类型的联合类型的分发
 
 ```typescript
 type IKun = 'sing' | 'dance' | 'rap'
@@ -594,9 +594,9 @@ type MyExclude<U, K> = U extends K ? never : U
 type IkunExclude = MyExclude<IKun, 'sing'|'rap'>
 ```
 
-## 8.Extract<Type, Union>
+## 8.Extract<UnionType, ExtractMembers>
 
-用于构造一个联合类型，从 `Type` 联合类型里面，提取了所有 `Union` 联合类型的联合成员。
+用于构造一个联合类型，从 `UnionType` 联合类型里面，提取了所有 `ExtractMembers` 联合类型的联合成员。
 
 ### 1.基本使用
 
@@ -644,7 +644,7 @@ type IKunNonNullable = MyNonNullable<IKun>
 
 ## 10.ReturnType\<Type\>
 
-使用了条件类型，类型推断
+使用了条件类型的类型推断
 
 [见上方【案例一：ReturnType 实现】](#1案例一：ReturnType 实现)
 
