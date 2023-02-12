@@ -30,7 +30,7 @@
 
 - `tsconfig.json` 文件会被忽略；
 
-*webpack* 中使用 *ts-loader* 打包时，也会自动读取 `tsconfig.json` 文件，根据配置编译 TypeScript代 代码。
+*webpack* 中使用 *ts-loader* 打包时，也会自动读取 `tsconfig.json` 文件，根据配置，编译 TypeScript代 代码。
 
 但是在实际开发中，我们的项目 *webpack* 环境通常会使用 *babel* 对 ts 代码进行编译。
 
@@ -62,6 +62,10 @@ graph LR
 ```json
 "include": ["src/**/*", "types/**/*/d/ts"]
 ```
+
+> `files` 要求编译器仅编译您列出的文件。它是一种严格的白名单模式，只有在您的列表中的文件才会被编译。
+>
+> `include` 选项是一种黑白名单混合模式，它告诉编译器要编译的文件。并使用 `exclude` 选项排除不需要编译的文件或文件夹。
 
 ### 2.compilerOptions 常见选项
 
@@ -202,25 +206,25 @@ type FooReturnType = ReturnType<typeof foo> // string 类型
 
 封装一个自己的工具 `MyReturnType`，实现 `ReturnType` 内置工具的效果，需要使用到 `infer` 关键词进行类型推断。
 
-1. 使用 `type` 定义一个类型工具。
+1.使用 `type` 定义一个类型工具。
 
 ```typescript
 type MyReturnType<T> = any
 ```
 
-2. 为类型工具，传入一个类型参数 `T`，并对 `T` 的类型进行限制，要求必须是一个函数类型。
+2.为类型工具，传入一个类型参数 `T`，并对 `T` 的类型进行限制，要求必须是一个函数类型。
 
 ```typescript
 type MyReturnType<T extends (...args: any[]) => void> = any
 ```
 
-3. 在函数类型的返回值类型上，进行条件类型的类型推断，使用 `infer` 关键词
+3.在函数类型的返回值类型上，进行条件类型的类型推断，使用 `infer` 关键词
 
 ```typescript
 type MyReturnType<T extends (...args: any[]) => void> = T extends (...args: any[]) => infer R ? R : never
 ```
 
-4. 使用自己封装的类型工具 `MyReturnType`。
+4.使用自己封装的类型工具 `MyReturnType`。
 
 ```typescript
 type CalcFnType = (num1: number, num2: string) => number
