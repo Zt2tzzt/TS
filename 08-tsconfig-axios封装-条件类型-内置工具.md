@@ -17,7 +17,9 @@
 作用二：让编辑器（如 VSCode）可以按照正确的方式识别 TypeScript 代码； 
 - 更好的语法提示、静态类型检测等等；
 
-> JavaScript 项目可以使用 `jsconfig.json` 文件，它的作用与 `tsconfig.json` 基本相同，只是默认启用了一些 JavaScript 相关的编译选项。
+> JavaScript 项目可以使用 `jsconfig.json` 文件.
+>
+> 它的作用与 `tsconfig.json` 基本相同，只是默认启用了一些 JavaScript 相关的编译选项。
 
 ## 3.怎么用？
 
@@ -30,9 +32,9 @@
 
 - `tsconfig.json` 文件会被忽略；
 
-*webpack* 中使用 *ts-loader* 打包时，也会自动读取 `tsconfig.json` 文件，根据配置，编译 TypeScript代 代码。
+*webpack* 中使用 *ts-loader* 打包时，也会自动读取 `tsconfig.json` 文件，并根据配置，编译 TypeScript代 代码。
 
-但是在实际开发中，我们的项目 *webpack* 环境通常会使用 *babel* 对 ts 代码进行编译。
+但是，在实际开发中，项目 *webpack* 环境通常会使用 *babel* 对 ts 代码进行编译。
 
 ## 4.配置
 
@@ -63,7 +65,7 @@ graph LR
 "include": ["src/**/*", "types/**/*/d/ts"]
 ```
 
-> `files` 要求编译器仅编译您列出的文件。它是一种严格的白名单模式，只有在您的列表中的文件才会被编译。
+> `files` 要求编译器仅编译列出的文件。它是一种严格的白名单模式，只有在列表中的文件才会被编译。
 >
 > `include` 选项是一种黑白名单混合模式，它告诉编译器要编译的文件。并使用 `exclude` 选项排除不需要编译的文件或文件夹。
 
@@ -128,18 +130,20 @@ graph LR
 demo-project\09_TypeScript知识扩展-axios封装\src\service\request\index.ts
 
 # 三、条件类型
-泛型（类型）编程的时候，需要基于输入值的类型来决定输出值的类型。**条件类型（Conditional types）**用来描述输入类型和输出类型之间的关系。 
+泛型（类型）编程的时候，需要基于输入值的类型来决定输出值的类型。
 
-条件类型的写法类似于 JavaScript 中的条件表达式：”condition ? trueExpression : falseExpression“：
+**条件类型（Conditional types）**用来描述输入类型和输出类型之间的关系。 
 
-`SomeType extends OtherType ? TrueType : FalseType;`
+写法类似于 JavaScript 中的条件表达式：”condition ? trueExpression : falseExpression“：
+
+- `SomeType extends OtherType ? TrueType : FalseType;`
 
 ```typescript
 type IDType = number | string
 type ResType = boolean extends IDType ? true : false // 此时 resType 为字面量类型：false
 ```
 
-## 1.基本用法
+## 1.基本用法（extends）
 
 这是一个函数重载案例。
 
@@ -178,7 +182,7 @@ const res3 = sum(123, "cba") // 报错
 
 ## 2.类型推断（infer）
 
-**在条件类型中推断（Inferring Within Conditional Types）**指的是：
+**条件类型的推断（Inferring Within Conditional Types）**指的是：
 
 使用条件类型提供的 `infer` 关键词，从条件类型中推断类型，然后在 true 分支里引用推断结果；
 
@@ -272,7 +276,7 @@ type CalcParameterType = MyParameterType<CalcFnType> // [num1: number, num2: str
 
 ## 3.类型分发
 
-**分发条件类型（Distributive Conditional Types）**指的是：
+**条件类型的分发（Distributive Conditional Types）**指的是：
 
 当使用条件类型时，如果传入一个联合类型，就会进行分发（distributive）
 
@@ -295,7 +299,7 @@ type NumArray = ToArray<number | string> //  (string | number)[] 类型
 
 定义一个类型工具 `ToArray`，传入一个联合类型，条件类型会被应用到每个联合成员，联合成员会被分发：
 
-当传入 `string | number` 时，条件类型语句会遍历联合成员；相当于 `ToArray<string> | ToArray<number>`；所以最后的结果是：`string[] | number[]`；
+比如，当传入 `string | number` 时，条件类型语句会遍历联合成员；相当于 `ToArray<string> | ToArray<number>`；所以最后的结果是：`string[] | number[]`；
 
 ```typescript
 type ToArray<T> = T extends any ? T[] : never
@@ -473,8 +477,8 @@ interface IKun {
   slogan?: string
 }
 
-type MyRecord<Keys extends keyof any, T> = {
-  [P in Keys]: T
+type MyRecord<K extends keyof any, T> = {
+  [P in K]: T
 }
 
 type IKuns = MyRecord<Address, IKun>
@@ -502,7 +506,7 @@ type IKunPick = Pick<IKun, 'name' | 'slogan'>
 
 ### 2.自己实现
 
-使用了映射类型。
+使用了映射类型和条件类型的分发。
 
 ```typescript
 interface IKun {
@@ -718,7 +722,7 @@ function factory<T extends new (...args: any[]) => any>(ctor: T): MyInstanceType
   return new ctor()
 }
 
-const p3 = factory(Person)
+const p3 = factory(Person) // Person 类型
 ```
 
 
