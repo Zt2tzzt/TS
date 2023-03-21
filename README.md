@@ -1,7 +1,8 @@
 # TS
 
 #### 介绍
-Zetian 的 TS 学习笔记分享。From coderwhy
+
+TS 学习笔记分享。coderwhy 前端学习笔记分享。
 
 #### 参与贡献
 
