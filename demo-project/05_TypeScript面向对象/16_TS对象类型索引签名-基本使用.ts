@@ -22,11 +22,9 @@
 //   return abc
 // }
 
-
 // const info = getInfo()
 // const name = info["name"]
 // console.log(name, info.age, info.address)
-
 
 // 2.索引签名的案例
 interface ICollection {
@@ -41,10 +39,9 @@ function printCollection(collection: ICollection) {
   }
 }
 
-const array = ["abc", "cba", "nba"]
-const tuple: [string, string] = ["why", "广州"]
+const array = ['abc', 'cba', 'nba']
+const tuple: [string, string] = ['why', '广州']
 printCollection(array)
 printCollection(tuple)
 
 export {}
-

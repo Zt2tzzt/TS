@@ -10,4 +10,3 @@ foo(10, undefined)
 foo(10, 55)
 
 export {}
-

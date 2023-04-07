@@ -10,7 +10,7 @@ function useState<Type>(initialState: Type): [Type, (newState: Type) => void] {
 
 // 初始化count
 const [count, setCount] = useState(100)
-const [message, setMessage] = useState("Hello World")
+const [message, setMessage] = useState('Hello World')
 const [banners, setBanners] = useState<any[]>([])
 
 export {}

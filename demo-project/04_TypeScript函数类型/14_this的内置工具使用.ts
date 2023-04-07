@@ -1,4 +1,4 @@
-function foo(this: { name: string }, info: {name: string}) {
+function foo(this: { name: string }, info: { name: string }) {
   console.log(this, info)
 }
 
@@ -7,10 +7,8 @@ type FooType = typeof foo
 // 1.ThisParameterType: 获取FooType类型中this的类型
 type FooThisType = ThisParameterType<FooType>
 
-
 // 2.OmitOmitThisParameter: 删除this参数类型, 剩余的函数类型
 type PureFooType = OmitThisParameter<FooType>
-
 
 // 3.ThisType: 用于绑定一个上下文的this
 interface IState {
@@ -26,18 +24,17 @@ interface IStore {
 
 const store: IStore & ThisType<IState> = {
   state: {
-    name: "why",
+    name: 'why',
     age: 18
   },
-  eating: function() {
+  eating: function () {
     console.log(this.name)
   },
-  running: function() {
+  running: function () {
     console.log(this.name)
   }
 }
 
 store.eating.call(store.state)
-
 
 export {}

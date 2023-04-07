@@ -19,4 +19,3 @@ interface IIndexType {
 // names["map/filter"] => function
 
 export {}
-

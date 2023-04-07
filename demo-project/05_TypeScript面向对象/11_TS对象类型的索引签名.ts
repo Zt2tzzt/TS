@@ -10,7 +10,6 @@ console.log(names[0])
 console.log(names[1])
 console.log(names[2])
 
-
 function iteratorCollection(collection: ICollection) {
   console.log(collection[0])
   console.log(collection[1])

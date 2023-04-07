@@ -1,5 +1,5 @@
 type MapPerson<Type> = {
-  - readonly [Property in keyof Type] - ?: Type[Property]
+  -readonly [Property in keyof Type]-?: Type[Property]
 }
 
 interface IPerson {
@@ -9,16 +9,14 @@ interface IPerson {
   address?: string
 }
 
-// 
+//
 type IPersonRequired = MapPerson<IPerson>
 
 const p: IPersonRequired = {
-  name: "why",
+  name: 'why',
   age: 18,
   height: 1.88,
-  address: "广州市"
+  address: '广州市'
 }
 
-
 export {}
-

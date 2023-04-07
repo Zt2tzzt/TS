@@ -10,12 +10,11 @@ interface IRun {
   running: () => void
 }
 
-
 const ikun: IKun = {
-  name: "why",
+  name: 'why',
   age: 18,
-  slogan: "你干嘛!",
-  playBasketball: function() {}
+  slogan: '你干嘛!',
+  playBasketball: function () {}
 }
 
 // 作用: 接口被类实现
@@ -24,13 +23,9 @@ class Person implements IKun, IRun {
   age: number
   slogan: string
 
-  playBasketball() {
-    
-  }
+  playBasketball() {}
 
-  running() {
-
-  }
+  running() {}
 }
 
 const ikun2 = new Person()

@@ -10,7 +10,6 @@ type MapPerson<Type> = {
   // age: number
 }
 
-
 interface IPerson {
   name: string
   age: number
@@ -23,6 +22,4 @@ interface IPerson {
 // }
 type NewPerson = MapPerson<IPerson>
 
-
 export {}
-

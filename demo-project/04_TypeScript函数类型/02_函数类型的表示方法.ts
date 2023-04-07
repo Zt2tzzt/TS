@@ -7,4 +7,3 @@ const bar: BarType = (arg: number): number => {
 }
 
 export {}
-

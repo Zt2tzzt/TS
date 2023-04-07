@@ -10,8 +10,8 @@
 // }
 
 enum Direction {
-  LEFT = "LEFT",
-  RIGHT = "RIGHT"
+  LEFT = 'LEFT',
+  RIGHT = 'RIGHT'
 }
 
 enum Operation {

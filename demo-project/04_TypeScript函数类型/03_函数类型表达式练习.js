@@ -7,7 +7,6 @@ function calc(calcFn) {
   console.log(res)
 }
 
-
 function add(num1, num2) {
   return num1 + num2
 }

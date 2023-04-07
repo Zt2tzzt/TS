@@ -13,9 +13,9 @@ interface IKun extends IPerson {
 }
 
 const ikun: IKun = {
-  name: "why",
+  name: 'why',
   age: 18,
-  slogan: "你干嘛, 哎呦"
+  slogan: '你干嘛, 哎呦'
 }
 
 export {}

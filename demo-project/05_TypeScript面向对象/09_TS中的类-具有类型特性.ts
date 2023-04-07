@@ -7,7 +7,7 @@ class Person {}
  *  3.类也可以当中有一个构造签名的函数
  */
 
-const name: string = "aaa"
+const name: string = 'aaa'
 const p: Person = new Person()
 function printPerson(p: Person) {}
 

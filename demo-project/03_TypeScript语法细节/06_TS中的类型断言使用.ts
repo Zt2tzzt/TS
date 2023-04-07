@@ -6,10 +6,9 @@
 // }
 
 // 使用类型断言
-const imgEl = document.querySelector(".img") as HTMLImageElement
-imgEl.src = "xxx"
-imgEl.alt = "yyy"
-
+const imgEl = document.querySelector('.img') as HTMLImageElement
+imgEl.src = 'xxx'
+imgEl.alt = 'yyy'
 
 // 类型断言的规则: 断言只能断言成更加具体的类型, 或者 不太具体(any/unknown) 类型
 const age: number = 18
@@ -20,6 +19,5 @@ const age: number = 18
 // const age3 = age as any
 // const age4 = age3 as string
 // console.log(age4.split(" "))
-
 
 export {}

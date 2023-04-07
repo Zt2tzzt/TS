@@ -1,27 +1,25 @@
-
 // export function formatPrice() {
 
 // }
 
 // export function formatDate() {
-  
+
 // }
 
 export namespace price {
   export function format(price: string) {
-    return "¥" + price
+    return '¥' + price
   }
 
-  export const name = "price"
+  export const name = 'price'
 }
 
 export namespace date {
   export function format(dateString) {
-    return "2022-10-10"
+    return '2022-10-10'
   }
 
-  const name = "date"
+  const name = 'date'
 }
-
 
 // export {}

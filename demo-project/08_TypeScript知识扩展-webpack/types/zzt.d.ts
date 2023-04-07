@@ -1,4 +1,4 @@
-declare module "lodash" {
+declare module 'lodash' {
   export function join(...args: any[]): any
 }
 
@@ -15,15 +15,13 @@ declare class Person {
 
 // 作为一个第三方库为其他开发者提供类型声明文件 .d.ts => axios.d.ts
 
-
 // 声明文件模块
-declare module "*.png"
-declare module "*.jpg"
-declare module "*.jpeg"
-declare module "*.svg"
+declare module '*.png'
+declare module '*.jpg'
+declare module '*.jpeg'
+declare module '*.svg'
 
-declare module "*.vue"
-
+declare module '*.vue'
 
 // 声明成模块(不合适)
 // 声明命名空间

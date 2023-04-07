@@ -9,7 +9,7 @@ class Person {
   }
 
   running() {
-    console.log("running:", this._name)
+    console.log('running:', this._name)
   }
 
   // setter/getter: 对属性的访问进行拦截操作
@@ -20,7 +20,6 @@ class Person {
   get name() {
     return this._name
   }
-
 
   set age(newValue: number) {
     if (newValue >= 0 && newValue < 200) {
@@ -33,12 +32,11 @@ class Person {
   }
 }
 
-const p = new Person("why", 100)
-p.name = "kobe"
+const p = new Person('why', 100)
+p.name = 'kobe'
 console.log(p.name)
 
 p.age = -10
 console.log(p.age)
-
 
 export {}

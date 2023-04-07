@@ -2,8 +2,8 @@ function getLength(args: { length: number }) {
   return args.length
 }
 
-getLength("aaaaa")
-getLength(["abc", "cba", "nba", 123])
+getLength('aaaaa')
+getLength(['abc', 'cba', 'nba', 123])
 const info = {
   length: 100
 }

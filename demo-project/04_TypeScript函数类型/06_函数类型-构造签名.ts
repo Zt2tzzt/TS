@@ -1,5 +1,4 @@
-class Person {
-}
+class Person {}
 
 interface ICTORPerson {
   new (): Person

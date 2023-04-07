@@ -10,7 +10,6 @@
 //   return arg.length
 // }
 
-
 // 3.联合类型实现(可以使用联合类型实现的情况, 尽量使用联合类型)
 // function getLength(arg: string | any[]) {
 //   return arg.length
@@ -21,7 +20,6 @@ function getLength(arg: { length: number }) {
   return arg.length
 }
 
-
-getLength("aaaaa")
-getLength(["abc", "cba", "nba"])
-getLength({ name: "why", length: 100 })
+getLength('aaaaa')
+getLength(['abc', 'cba', 'nba'])
+getLength({ name: 'why', length: 100 })

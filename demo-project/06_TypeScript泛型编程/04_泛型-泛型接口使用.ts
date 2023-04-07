@@ -4,11 +4,10 @@ interface IKun<Type = string> {
   slogan: Type
 }
 
-
 const kunkun: IKun<string> = {
-  name: "why",
+  name: 'why',
   age: 18,
-  slogan: "哈哈哈"
+  slogan: '哈哈哈'
 }
 
 const ikun2: IKun<number> = {
@@ -18,10 +17,9 @@ const ikun2: IKun<number> = {
 }
 
 const ikun3: IKun = {
-  name: "kobe",
+  name: 'kobe',
   age: 30,
-  slogan: "坤坤加油!"
+  slogan: '坤坤加油!'
 }
-
 
 export {}

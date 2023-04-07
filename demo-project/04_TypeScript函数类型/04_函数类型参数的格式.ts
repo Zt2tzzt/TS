@@ -4,13 +4,13 @@ function calc(calcFn: CalcType) {
   calcFn(10, 20)
 }
 
-calc(function(num) {
+calc(function (num) {
   return 123
 })
 
 // forEach栗子:
-const names = ["abc", "cba", "nba"]
-names.forEach(function(item) {
+const names = ['abc', 'cba', 'nba']
+names.forEach(function (item) {
   console.log(item.length)
 })
 
@@ -24,13 +24,12 @@ interface IPerson {
 
 // typescript github issue, 成员
 const p = {
-  name: "why",
+  name: 'why',
   age: 18,
   height: 1.88,
-  address: "广州市"
+  address: '广州市'
 }
 
 const info: IPerson = p
 
 export {}
-

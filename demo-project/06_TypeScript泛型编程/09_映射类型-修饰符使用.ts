@@ -11,9 +11,6 @@ interface IPerson {
 
 type IPersonOptional = MapPerson<IPerson>
 
-const p: IPersonOptional = {
-
-}
+const p: IPersonOptional = {}
 
 export {}
-

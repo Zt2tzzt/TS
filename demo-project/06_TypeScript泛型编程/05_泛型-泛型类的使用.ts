@@ -9,7 +9,7 @@ class Point<Type = number> {
 
 const p1 = new Point(10, 20)
 console.log(p1.x)
-const p2 = new Point("123", "321")
+const p2 = new Point('123', '321')
 console.log(p2.x)
 
 export {}

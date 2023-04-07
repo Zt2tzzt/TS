@@ -8,7 +8,6 @@
 // add("abc", "cba")
 // add({aaa: "aaa"}, 123)
 
-
 // 1.实现两个函数
 // function add1(num1: number, num2: number) {
 //   return num1 + num2
@@ -21,12 +20,10 @@
 // add1(10, 20)
 // add2("abc", "cba")
 
-
 // 2.错误的做法: 联合类型是不可以
 // function add(arg1: number|string, arg2: number|string) {
 //   return arg1 + arg2
 // }
-
 
 // 3.TypeScript中函数的重载写法
 // 3.1.先编写重载签名
@@ -39,7 +36,7 @@ function add(arg1: any, arg2: any): any {
 }
 
 add(10, 20)
-add("aaa", "bbb")
+add('aaa', 'bbb')
 // 通用函数不能被调用
 // add({name: "why"}, "aaa")
 // add("aaa", 111)

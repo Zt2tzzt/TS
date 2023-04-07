@@ -6,7 +6,6 @@ abstract class Shape {
   abstract getArea()
 }
 
-
 class Rectangle extends Shape {
   constructor(public width: number, public height: number) {
     super()
@@ -33,10 +32,9 @@ class Triangle extends Shape {
   }
 
   getArea() {
-    return this.floor * this.height / 2
+    return (this.floor * this.height) / 2
   }
 }
-
 
 // 通用的函数
 function calcArea(shape: Shape) {
@@ -48,7 +46,7 @@ calcArea(new Circle(5))
 calcArea(new Triangle(6, 8))
 
 // 在Java中会报错: 不允许
-calcArea({ getArea: function() {} })
+calcArea({ getArea: function () {} })
 
 // 抽象类不能被实例化
 // calcArea(new Shape())

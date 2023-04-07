@@ -14,22 +14,21 @@ type HYRecord<Keys extends keyof any, T> = {
   [P in Keys]: T
 }
 
-
 // IKun都变成可选的
-type t1 = "上海" | "北京" | "洛杉矶"
+type t1 = '上海' | '北京' | '洛杉矶'
 type IKuns = HYRecord<t1, IKun>
 
 const ikuns: IKuns = {
-  "上海": {
-    name: "xxx",
+  上海: {
+    name: 'xxx',
     age: 10
   },
-  "北京": {
-    name: "yyy",
+  北京: {
+    name: 'yyy',
     age: 5
   },
-  "洛杉矶": {
-    name: "zzz",
+  洛杉矶: {
+    name: 'zzz',
     age: 3
   }
 }

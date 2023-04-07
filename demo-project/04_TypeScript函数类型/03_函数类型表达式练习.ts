@@ -8,7 +8,6 @@ function calc(calcFn: CalcType) {
   console.log(res)
 }
 
-
 // 2.函数的调用
 function sum(num1: number, num2: number) {
   return num1 + num2
@@ -26,7 +25,7 @@ function mul(num1: number, num2: number) {
 calc(mul)
 
 // 3.使用匿名函数
-calc(function(num1, num2) {
+calc(function (num1, num2) {
   return num1 - num2
 })
 

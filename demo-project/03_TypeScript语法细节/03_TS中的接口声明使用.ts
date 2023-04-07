@@ -1,6 +1,6 @@
-const name = "why"
+const name = 'why'
 
-console.log("why")
+console.log('why')
 console.log(name)
 
 type PointType = {
@@ -17,10 +17,6 @@ interface PointType2 {
   z?: number
 }
 
-function printCoordinate(point: PointType2) {
-  
-}
-
+function printCoordinate(point: PointType2) {}
 
 export {}
-

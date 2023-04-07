@@ -4,4 +4,3 @@ interface IPerson {
 }
 
 type IDType = number | string
-

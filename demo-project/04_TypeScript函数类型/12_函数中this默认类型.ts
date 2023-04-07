@@ -2,16 +2,15 @@
 
 // 1.对象中的函数中的this
 const obj = {
-  name: "why",
-  studying: function() {
+  name: 'why',
+  studying: function () {
     // 默认情况下, this是any类型
-    console.log(this.name.length, "studying")
+    console.log(this.name.length, 'studying')
   }
 }
 
 obj.studying()
 // obj.studying.call({})
-
 
 // 2.普通的函数
 function foo() {

@@ -10,7 +10,6 @@ type HYPick<T, K extends keyof T> = {
 }
 
 // IKun都变成可选的
-type IKuns = HYPick<IKun, "slogan"|"name">
-
+type IKuns = HYPick<IKun, 'slogan' | 'name'>
 
 export {}

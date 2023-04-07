@@ -2,7 +2,7 @@
 // 这个过程称之为类型推导
 // let进行类型推导, 推导出来的通用类型
 // const进行类型推导, 推导出来的字面量类型(后续专门讲解)
-let name = "why"
+let name = 'why'
 let age = 18
 const height = 1.88
 

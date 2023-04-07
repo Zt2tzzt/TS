@@ -7,14 +7,13 @@ type LyricType = {
 // 歌词解析工具
 function parseLyric(lyric: string): LyricType[] {
   const lyrics: LyricType[] = []
-  lyrics.push({ time: 1111, text: "天空想要下雨" })
+  lyrics.push({ time: 1111, text: '天空想要下雨' })
   return lyrics
 }
 
-const lyricInfos = parseLyric("fdafdafdafa")
+const lyricInfos = parseLyric('fdafdafdafa')
 for (const item of lyricInfos) {
   console.log(item.time, item.text)
 }
-
 
 export {}

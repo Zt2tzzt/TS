@@ -22,11 +22,10 @@ interface IIndexType {
   // bbb: boolean 错误的类型
 }
 
-const names: IIndexType = ["abc", "cba", "nba"]
+const names: IIndexType = ['abc', 'cba', 'nba']
 const item1 = names[0]
-const forEachFn = names["forEach"]
+const forEachFn = names['forEach']
 
-names["aaa"]
+names['aaa']
 
 export {}
-
