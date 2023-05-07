@@ -28,13 +28,13 @@
 在执行 `tsc` 命令，没有其它输入文件参数时：
 
 - 编译器将由当前目录开始向父级目录寻找包含 `tsconfig.json` 文件的目录。
-- 或者可以使用 `--project`（简写 `-p`）的命令行选项来指定包含了 `tsconfig.json` 的目录；
+- 或者可以使用 `--project`（简写 `-p`）的命令行选项，来指定包含了 `tsconfig.json` 的目录；
 
 在执行 `tsc` 命令，指定了输入文件参数时:
 
 - `tsconfig.json` 文件会被忽略；
 
-_webpack_ 中使用 _ts-loader_ 打包时，也会自动读取 `tsconfig.json` 文件，并根据配置，编译 TypeScript 代 代码。
+_webpack_ 中使用 _ts-loader_ 打包时，也会自动读取 `tsconfig.json` 文件，并根据配置，编译 TypeScript 代码。
 
 但是，在实际开发中，项目 _webpack_ 环境通常会使用 _babel_ 对 ts 代码进行编译。
 
@@ -67,14 +67,14 @@ graph LR
 "include": ["src/**/*", "types/**/*/d/ts"]
 ```
 
-> `files` 要求编译器仅编译列出的文件。它是一种严格的白名单模式，只有在列表中的文件才会被编译。
+> `files` 选项，是一种严格的白名单模式，要求编译器，仅编译列出的文件。
 >
-> `include` 选项是一种黑白名单混合模式，它告诉编译器要编译的文件。并使用 `exclude` 选项排除不需要编译的文件或文件夹。
+> `include` 选项，是一种黑白名单混合模式，它告诉编译器要编译的文件。并使用 `exclude` 选项排除不需要编译的文件或文件夹。
 
 ### 2.compilerOptions 常见选项
 
 ```json
-// 用tsc编译时，需要的配置文件。
+// 用 tsc 编译时，需要的配置文件。
 {
   "compilerOptions": {
     // 目标代码（ts -> js(es5/6/7/...)），实际项目开发中用的是 babel 编译，会忽略 target 选项。
@@ -133,11 +133,11 @@ demo-project\09_TypeScript 知识扩展-axios 封装\src\service\request\index.t
 
 # 三、条件类型
 
-泛型（类型）编程的时候，需要基于输入值的类型来决定输出值的类型。
+泛型（类型）编程时，需要基于输入值的类型，来决定输出值的类型。
 
-**条件类型（Conditional types）**用来描述输入类型和输出类型之间的关系。
+**条件类型（Conditional types）**，用来描述输入类型、输出类型之间的关系。
 
-写法类似于 JavaScript 中的条件表达式：”condition ? trueExpression : falseExpression“：
+写法类似于 JS 中的条件表达式：”condition ? trueExpression : falseExpression“：
 
 - `SomeType extends OtherType ? TrueType : FalseType;`
 
@@ -187,7 +187,7 @@ const res3 = sum(123, 'cba') // 报错
 
 **条件类型的推断（Inferring Within Conditional Types）**指的是：
 
-使用条件类型提供的 `infer` 关键词，从条件类型中推断类型，然后在 true 分支里引用推断结果；
+使用条件类型提供的 `infer` 关键词，从条件类型中，推断类型，然后在 **true 分支**里引用推断结果；
 
 案例理解：
 
@@ -201,6 +201,7 @@ const res3 = sum(123, 'cba') // 报错
 
 ```typescript
 type CalcFnType = (num1: number, num2: string) => number
+
 function foo() {
   return 'abc'
 }
@@ -237,6 +238,7 @@ type MyReturnType<T extends (...args: any[]) => void> = T extends (...args: any[
 
 ```typescript
 type CalcFnType = (num1: number, num2: string) => number
+
 function foo() {
   return 'abc'
 }
@@ -291,7 +293,7 @@ type CalcParameterType = MyParameterType<CalcFnType> // [num1: number, num2: str
 
 当使用条件类型时，如果传入一个联合类型，就会进行分发（distributive）
 
-案例理解，
+:egg: 案例理解，
 
 将一个类型，转成这个类型的数组类型
 
@@ -310,7 +312,7 @@ type NumArray = ToArray<number | string> //  (string | number)[] 类型
 
 定义一个类型工具 `ToArray`，传入一个联合类型，条件类型会被应用到每个联合成员，联合成员会被分发：
 
-比如，当传入 `string | number` 时，条件类型语句会遍历联合成员；相当于 `ToArray<string> | ToArray<number>`；所以最后的结果是：`string[] | number[]`；
+比如，当传入 `string | number` 时，条件类型语句，会遍历联合成员；相当于 `ToArray<string> | ToArray<number>`；所以最后的结果是：`string[] | number[]`；
 
 ```typescript
 type ToArray<T> = T extends any ? T[] : never
@@ -346,7 +348,7 @@ type IKunOptional = Partial<IKun>
 
 ### 2.自己实现
 
-使用了映射类型。
+使用了：映射类型。
 
 > 【回顾】：`keyof` 作用于对象类型，会将其中所有属性名的字面量类型，作为联合成员，组成一个联合类型。
 >
@@ -389,7 +391,7 @@ type IKunRequired = Required<IKun>
 
 ### 2.自己实现
 
-使用了映射类型。
+使用了：映射类型。
 
 ```typescript
 interface IKun {
@@ -428,7 +430,7 @@ type IKunReadonly = Readonly<IKun>
 
 ### 2.自己实现
 
-使用了映射类型。
+使用了：映射类型。
 
 ```typescript
 interface IKun {
@@ -468,7 +470,7 @@ type IKuns = Record<Address, IKun>
 
 ### 2.自己实现
 
-使用了映射类型。
+使用了：映射类型。
 
 > 【回顾】：`in` 关键字作用于联合类型，会遍历联合成员。
 >
@@ -497,7 +499,7 @@ type IKuns = MyRecord<Address, IKun>
 
 ## 5.Pick<Type, Keys>
 
-用于构造一个对象类型，从 `Type` 对象类型里面挑选 `Keys` 联合类型的联合成员作为对象属性名字面量。
+用于构造一个对象类型，从 `Type` 对象类型里，挑选 `Keys` 联合类型的联合成员，作为对象属性名字面量。
 
 ### 1.基本使用
 
@@ -517,7 +519,7 @@ type IKunPick = Pick<IKun, 'name' | 'slogan'>
 
 ### 2.自己实现
 
-使用了映射类型和条件类型的分发。
+使用了：映射类型、条件类型的分发；
 
 ```typescript
 interface IKun {
@@ -536,7 +538,7 @@ type IKuns = ZTPick<IKun, 'name' | 'slogan'>
 
 ## 6.Omit<Type, Keys>
 
-用于构造一个对象类型，从 `Type` 类型里面过滤 `Keys` 类型作为对象属性名。
+用于构造一个对象类型，从 `Type` 类型里，过滤 `Keys` 类型，作为对象属性名。
 
 ### 1.基本使用
 
@@ -555,14 +557,14 @@ type IKunOmit = Omit<IKun, 'name' | 'slogan'>
 
 ### 2.自己实现
 
-使用了映射类型，和条件类型的分发。
+使用了：映射类型、条件类型的分发；
 
-> 【补充】：从联合类型 `U` 中过滤联合类型 `k` 中的联合成员，写法：`U extends K ? never : U`，
+> 【补充】：从联合类型 `U` 中，过滤联合类型 `k` 中的联合成员，写法：`U extends K ? never : U`，
 >
-> - 使用到了条件类型中的联合类型的类型分发。
+> - 使用到了，条件类型中，联合类型的类型分发。
 > - 也就是 `U` 中的联合成员，进行了**分发**。
 >
-> 这是，内置类型工具 `Exclude` 的作用。
+> 这是，下方就介绍的内置类型工具 `Exclude` 的作用。
 
 ```typescript
 type U = 'abc' | 'cba' | 'nba'
@@ -603,7 +605,7 @@ type IkunExclude = Exclude<IKun, 'sing' | 'rap'> // 'dance' 类型
 
 ### 2.自己实现
 
-使用了条件类型的联合类型的分发
+使用了：条件类型的分发；
 
 ```typescript
 type IKun = 'sing' | 'dance' | 'rap'
@@ -627,7 +629,7 @@ type IkunExtract = Extract<IKun, 'sing' | 'rap' | 'football'> // 'sing' | 'rap' 
 
 ### 2.自己实现
 
-使用了条件类型，联合类型的分发
+使用了：条件类型的分发；
 
 ```typescript
 type IKun = 'sing' | 'dance' | 'rap'
@@ -651,7 +653,7 @@ type IKunNonNullable = NonNullable<IKun> // "sing" | "dance" | "rap" 类型
 
 ### 2.自己实现
 
-使用了条件类型，联合类型的分发
+使用了：条件类型的分发；
 
 ```typescript
 type IKun = 'sing' | 'dance' | 'rap' | null | undefined
@@ -663,7 +665,7 @@ type IKunNonNullable = MyNonNullable<IKun>
 
 ## 10.ReturnType\<Type\>
 
-使用了条件类型的类型推断
+使用了：条件类型的类型推断；
 
 [见上方【案例一：ReturnType 实现】](#1 案例一：ReturnType 实现)
 
@@ -671,7 +673,9 @@ type IKunNonNullable = MyNonNullable<IKun>
 
 用于构造一个由 `Type` 的构造函数创建出来的实例的类型。
 
-> 【补充】：`typeof [构造函数]` 拿到的是构造函数（器）的类型，而 `InstanceType<Type>` 可以拿到 `Type` 构造函数（器）创建出来的实例的类型。
+> 【补充】：`typeof [构造函数]` 拿到的，是构造函数（器）的类型；
+>
+> 而 `InstanceType<Type>` 可以拿到 `Type` 构造函数（器）创建出来的实例的类型。
 
 ### 1.基本使用
 
@@ -681,7 +685,7 @@ class Person {}
 type MyPerson = InstanceType<typeof Person> // Person 类型
 ```
 
-常用于创建通用的实例的工具函数。
+常用于，创建通用的实例的工具函数。
 
 案例一：在工厂函数参数上进行类型约束，类型丢失了
 
@@ -695,7 +699,9 @@ function factory(ctor: new (...arg: any[]) => any) {
 const p = factory(Person) // any 类型，类型丢失了
 ```
 
-案例二：在工厂函数上使用泛型，并进行泛型类型约束，返回结果被推导为构造函数（器）的类型，而非构造函数（器）创建的实例的类型，类型丢失了。
+案例二：在工厂函数上使用泛型，并进行泛型类型约束；
+
+返回结果被推导为构造函数（器）的类型，而非构造函数（器）创建的实例的类型，类型丢失了。
 
 ```typescript
 class Person {}
@@ -721,7 +727,7 @@ const p = factory(Person) // Person 类型
 
 ### 2.自己实现
 
-用到了条件类型，类型推断。
+使用了：条件类型的类型推断；
 
 ```typescript
 class Person {}
