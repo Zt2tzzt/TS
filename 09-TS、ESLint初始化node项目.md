@@ -8,10 +8,13 @@ npm init
 
 ## 一、TS 初始化
 
-安装 typescript、ts-node 依赖。
+安装 typescript、@types/node，ts-node 依赖。
+
+- typescript、@types/node 依赖库，安装 typescript 和 node 的 ts 类型定义。
+- ts-node 依赖库，用于执行 t's
 
 ```she
-pnpm add typescript ts-node -D
+pnpm add typescript @types/node ts-node -D
 ```
 
 初始化 typescript 配置，生产 tsconfig.json 文件
@@ -34,8 +37,8 @@ npx tsc --init
       "@/*": ["./src/*"]
     },
     "outDir": "./dist",
-  }
-  "include": ["src/**/*.ts"], // // 有哪些ts代码需要经过编译解析
+  },
+  "include": ["./src/**/*.ts"], // // 有哪些ts代码需要经过编译解析
   "exclude": ["node_modules"], // 排除不需要进行 ts 解析的目录。在需要解析的目录下有引用就不会解析。
 }
 ```
@@ -46,7 +49,7 @@ npx tsc --init
 pnpm add tsconfig-paths -D
 ```
 
-安装 tsc-alias 依赖，用于对打包后的代码，进行路径别名的处理。
+安装 tsc-alias 依赖，用于对 tsc 打包后的代码，进行路径别名的处理。
 
 ```shell
 pnpm add tsc-alias -D
@@ -145,17 +148,54 @@ pnpm add prettier -D
 ```shell
 /node_modules/**
 /dist/**
+/logs/**
 ```
 
-## 四、package.json 配置
+## 四、tsup 打包工具
+
+tsup 是一个轻量的构建工具，底层由 esbuild 提供支持。 它可以直接把 .ts、.tsx 转成不同格式（esm、cjs、iife）的文件。
+
+安装 tsup 依赖
+
+```shell
+pnpm add tsup -D
+```
+
+在项目根目录，创建一个 tsup.config.ts 的配置文件。
+
+```typescript
+import { defineConfig } from "tsup"
+
+export default defineConfig({
+  entry: ['./src/index.ts'],  // 打包入口
+  sourcemap: true,  // 生成 sourcemap 文件以便于调试
+  clean: true, // 在打包之前清空 dist 目录
+  minify: true, // 压缩打包体积
+  dts: false, // 生成类型文件 xxx.d.ts
+  splitting: false, // 代码分割，esm 模式默认支持 如果 cjs 需要代码分割的话，就需要配置为true
+  format:["iife"],
+  outDir: "dist",
+  target: "es2020",
+  tsconfig: "tsconfig.json",
+})
+```
+
+在项目根目录下，执行命令，进行打包。
+
+```shell
+npx tsup
+```
+
+## 五、package.json 配置
 
 在 package.json 文件中的 script 配置中，加入如下配置。
 
 ```json
 {
   "scripts": {
-    "build": "rm -rf dist && tsc && tsc-alias",
-    "start": "node dist/index.js",
+    "build": "tsup",
+    "tsc-build": "rm -rf dist && tsc && tsc-alias",
+    "start": "node dist/index.global.js",
     "debug": "node --inspect-brk dist/index.js",
     "dev": "ts-node -r tsconfig-paths/register src/index.ts",
     "lint": "eslint ./src --ext .ts --fix",
